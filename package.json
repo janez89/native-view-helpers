@@ -1,0 +1,40 @@
+{
+  "name" : "native-view-helpers",
+  "description" : "native view helpers for NodeJS",
+  "version" : "0.1.0",
+  "homepage" : "https://github.com/janez89/native-view-helpers",
+  "repository" : {
+    "type" : "git",
+    "url" : "git://github.com/janez89/native-view-helpers.git"
+  },
+  "main" : "index.js",
+  "engine": "node >= 0.6.0",
+  "bin" : {},
+  "directories" : {
+    "test" : "test"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "optionalDependencies" : {
+  },
+  "dependencies" : { 
+  },
+  "devDependencies" : {
+    "mocha": "~1.12.0"
+  },
+  "keywords" : [
+    "view",
+    "helper",
+    "template",
+    "native"
+  ],
+  "author" : {
+    "name" : "janez89",
+    "email" : "m.janee@gmail.com",
+    "url" : "https://github.com/janez89/"
+  },
+  "contributors": [
+  ],
+  "license" : "MIT"
+}
