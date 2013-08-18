@@ -19,6 +19,7 @@
   "optionalDependencies" : {
   },
   "dependencies" : { 
+    "mpath": ""
   },
   "devDependencies" : {
     "mocha": "~1.12.0"
