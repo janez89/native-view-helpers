@@ -28,6 +28,23 @@ describe('#default', function(){
 			assert.equal(merged.age, 20)
 			assert.equal(merged.user, 'w')
 		})
+		it('should marge nested', function(){
+			var obj1 = { name: { first : 'First'} }
+			var obj2 = { name: { last: 'Last' } }
+			var merged = helper.mergeObject(obj1, obj2)
+
+			assert.equal(merged.name.first, 'First')
+			assert.equal(merged.name.last, 'Last')
+		})
+		it('should marge deep', function(){
+			var obj1 = { age: 20 }
+			var obj2 = { name: { first: 'First', last: 'Last' } }
+			var merged = helper.mergeObject(obj1, obj2)
+
+			assert.equal(merged.name.first, 'First')
+			assert.equal(merged.name.last, 'Last')
+			assert.equal(merged.age, 20)
+		})
 	})
 
 	describe('number format', function () {
@@ -45,7 +62,7 @@ describe('#default', function(){
 		})
 	})
 
-	describe('string format', function () {
+	describe('string', function () {
 		it('should nl2br', function () {
 			assert.equal(helper.nl2br('\r\n'), '<br />\r\n')
 			assert.equal(helper.nl2br('\n\r'), '<br />\n\r')
@@ -61,6 +78,9 @@ describe('#default', function(){
 		})
 		it('should use html special chars', function () {
 			assert.equal(helper.htmlspecialchars('<a href="link">label</a>', 'ENT_QUOTES'), '&lt;a href=&quot;link&quot;&gt;label&lt;/a&gt;')
+		})
+		it('should count chars', function () {
+			assert.equal(helper.countChars(/\-/g, '1-2 - 3-4'), 3)
 		})
 	})
 })
