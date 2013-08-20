@@ -5,6 +5,8 @@
 
 A collection of helper for NodeJS templates.
 
+`npm install native-view-helpers`
+
 ## Overview
 
 * [Usage](#usage)
@@ -55,8 +57,6 @@ A collection of helper for NodeJS templates.
 		* [submitButton](#submitbutton)
 	* [ActiveForm](#activeform)
 		* [Active Form Usage](#active-form-usage)
-		* [begin](#af-begin)
-		* [end](#af-end)
 		* [data](#data)
 	* [Widgets](#widgets)
 		* [pagination](#pagination)
@@ -67,6 +67,83 @@ A collection of helper for NodeJS templates.
 * [License](#license)
 
 ## Usage
+
+Node native helpers use with express
+```javascript
+// for static helpers
+app.locals.$ = require('native-view-helpers');
+// for dynamic helpers
+app.use(require('native-view-helpers').use('$')); // parameter is helper variable name in template
+```
+
+Use in templates
+
+EJS templates:
+
+```
+<%- $.nl2br('\r\n') %> // out: <br />
+<%- $.ucFirst('message') %> // out: Message
+<%- $.date.format('Y/m/d H:i:s') %>
+<%- $.html.a('/url-address', 'Label') %>
+<%- $.html.charset() %>
+
+Use form
+
+<%- $.form.begin('/target') %>
+
+<%- $.form.label('Username') %>
+<%- $.form.textField('username') %>
+
+<%- $.form.label('Password') %>
+<%- $.form.passwordField('password') %>
+
+<%- $.form.submitButton('Login') %>
+
+<%- $.form.end() %>
+
+Or active form
+
+<% var form = $.activeForm('/target') %>
+<%- form.begin() %>
+
+<%- form.label('username') %>
+<%- form.textField('username', { placeholder: 'Username'}) %>
+
+<%- form.label('Password') %>
+<%- form.passwordField('password', { placeholder: 'Password'}) %>
+
+<%- form.submitButton('Login') %>
+<%- form.end() %>
+
+Use dropDownList
+
+<%- $.form.dropDownList('category', null, ['Category 1', 'Category 2', 'Category 3'], { empty: '-- Select --'}) %>
+<%- $.form.dropDownList('category', 'val3', { val1: 'Category 1', val2: 'Category 2', val3: 'Category 3'}) %>
+<%- $.form.dropDownList('category', 12, [{ id: 10, name: 'Category 1'}, { id: 12, name: 'Category 2'}], { value: 'id', label: 'name'}) %>
+
+Use pagination
+
+<%- $.widgets.pagination({page: 1, pages: 12 }) %>
+<%- $.widgets.pagination({page: 1, count: 120, limit: 10 }) %>
+<%- $.widgets.pagination({page: 1, pages: 12, url: '/index?sort=name' }) %> out: /index?sort=name&page=[num]
+<%- $.widgets.pagination({page: 1, pages: 12, url: '/index?sort=name', query: 'p' }) %> out: /index?sort=name&p=[num]
+
+Building tree
+
+var list = [
+	{ 
+		id: 1, 
+		name: 'Main Category', 
+		children: [ 
+			{ id: 2, name: 'Sub Category 1' }, 
+			{ id: 2, name: 'Sub Category 1'	} 
+		]
+	}
+];
+
+<%- $.widgets.nestedList(list, function (fn, el, lvl) { return fn.html.a('/info/'+ el.id, el.name); }) %>
+
+```
 
 [Go to contents](#overview)
 
