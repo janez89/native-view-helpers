@@ -79,8 +79,30 @@ describe('#default', function(){
 		it('should use html special chars', function () {
 			assert.equal(helper.htmlspecialchars('<a href="link">label</a>', 'ENT_QUOTES'), '&lt;a href=&quot;link&quot;&gt;label&lt;/a&gt;')
 		})
+		it('should first char upper case', function () {
+			assert.equal(helper.ucFirst('first case upper'), 'First case upper')
+		})
 		it('should count chars', function () {
 			assert.equal(helper.countChars(/\-/g, '1-2 - 3-4'), 3)
+		})
+	})
+
+	describe('url', function () {
+		var url = helper.url('http://localhost/index?filter=name')
+		it('should parse url', function () {
+			assert.equal(url.getUrl(), 'http://localhost/index?filter=name')
+			assert.equal(url.setQs('filter','age').getUrl(), 'http://localhost/index?filter=age')
+			assert.equal(url.setQs('p',2).getUrl(), 'http://localhost/index?filter=age&p=2')
+		})
+	})
+
+	describe('path', function () {
+		var obj = {}
+		it('should set path', function () {
+			//helper.path.set('name', {})
+			//assert.equal(obj.name, {})
+			//helper.path.set('name.first', 'first name', obj)
+			//assert.equal(obj.name.first, 'first name')
 		})
 	})
 })
