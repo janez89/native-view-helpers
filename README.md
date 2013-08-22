@@ -72,8 +72,6 @@ Node native helpers use with express
 ```javascript
 // for static helpers
 app.locals.$ = require('native-view-helpers');
-// for dynamic helpers
-app.use(require('native-view-helpers').use('$')); // parameter is helper variable name in template
 ```
 
 Use in templates
@@ -189,11 +187,30 @@ var list = [
 
 ## Changelog
 
+### Aug 22, 2013 - version: 0.0.1
+
+* added defaults
+* added date plugin
+* added html plugin
+* added form plugin
+* added active form plugin
+* added widgets
+
+## Missing, Todo
+
+* API documentation
+* form, activeForm tests
+* more template engine example
+* examples
+
 [Go to contents](#overview)
 
 ***
 
 ## Authors and contributors
+
+* Janos Meszaros: [https://github.com/janez89](https://github.com/janez89)
+* For PHP style functions (number_format, date, strip_tags, htmlspeicalchars, nl2br) [http://phpjs.org/functions](http://phpjs.org/functions)
 
 [Go to contents](#overview)
 
