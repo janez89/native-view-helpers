@@ -97,26 +97,28 @@ describe('#widgets', function() {
 
 	describe('shippingChooser', function () {
 		it('should use shippingChooser', function () {
-			assert.equal(helper.widgets.shippingChooser('name', { date: new Date('2013-08-22 10:00') }), 
+			var date = new Date('2013-08-22 00:00')
+			var day = 24*60*60*1000;
+			assert.equal(helper.widgets.shippingChooser('name', { date: date }), 
 				'<select name="name" id="frm_name">\n' +
 				'\t<option value="">-- choose the shipping date --</option>\n'+
 				'\t<optgroup label="This week">\n'+
-				'\t\t<option value="1377158400000">August 22, 2013 Thursday (Today)</option>\n'+
-				'\t\t<option value="1377244800000">August 23, 2013 Friday (Tomorrow)</option>\n'+
-				'\t\t<option value="1377331200000">August 24, 2013 Saturday</option>\n'+
+				'\t\t<option value="'+ date.getTime() +'">August 22, 2013 Thursday (Today)</option>\n'+
+				'\t\t<option value="'+ (date.getTime()+ day) +'">August 23, 2013 Friday (Tomorrow)</option>\n'+
+				'\t\t<option value="'+ (date.getTime()+ 2*day) +'">August 24, 2013 Saturday</option>\n'+
 				'\t</optgroup>\n'+
 				'\t<optgroup label="Next week">\n'+
-				'\t\t<option value="1377504000000">August 26, 2013 Monday</option>\n'+
-				'\t\t<option value="1377590400000">August 27, 2013 Tuesday</option>\n'+
-				'\t\t<option value="1377676800000">August 28, 2013 Wednesday</option>\n'+
-				'\t\t<option value="1377763200000">August 29, 2013 Thursday</option>\n'+
-				'\t\t<option value="1377849600000">August 30, 2013 Friday</option>\n'+
-				'\t\t<option value="1377936000000">August 31, 2013 Saturday</option>\n'+
+				'\t\t<option value="'+ (date.getTime()+ 4*day) +'">August 26, 2013 Monday</option>\n'+
+				'\t\t<option value="'+ (date.getTime()+ 5*day) +'">August 27, 2013 Tuesday</option>\n'+
+				'\t\t<option value="'+ (date.getTime()+ 6*day) +'">August 28, 2013 Wednesday</option>\n'+
+				'\t\t<option value="'+ (date.getTime()+ 7*day) +'">August 29, 2013 Thursday</option>\n'+
+				'\t\t<option value="'+ (date.getTime()+ 8*day) +'">August 30, 2013 Friday</option>\n'+
+				'\t\t<option value="'+ (date.getTime()+ 9*day) +'">August 31, 2013 Saturday</option>\n'+
 				'\t</optgroup>\n'+
 				'\t<optgroup label="Later">\n'+
-				'\t\t<option value="1378108800000">September 2, 2013 Monday</option>\n'+
-				'\t\t<option value="1378195200000">September 3, 2013 Tuesday</option>\n'+
-				'\t\t<option value="1378281600000">September 4, 2013 Wednesday</option>\n'+
+				'\t\t<option value="'+ (date.getTime()+ 11*day) +'">September 2, 2013 Monday</option>\n'+
+				'\t\t<option value="'+ (date.getTime()+ 12*day) +'">September 3, 2013 Tuesday</option>\n'+
+				'\t\t<option value="'+ (date.getTime()+ 13*day) +'">September 4, 2013 Wednesday</option>\n'+
 				'\t</optgroup>\n'+
 				'</select>\n'
 			)
