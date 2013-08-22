@@ -187,7 +187,10 @@ var list = [
 
 ## Changelog
 
-### Aug 22, 2013 - version: 0.0.1
+### Aug 22, 2013 - version: 0.1.1
+* fixed widgets test issue
+
+### Aug 22, 2013 - version: 0.1.0
 
 * added defaults
 * added date plugin
