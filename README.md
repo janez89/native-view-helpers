@@ -195,6 +195,7 @@ var list = [
 * added form plugin
 * added active form plugin
 * added widgets
+* added tests
 
 ## Missing, Todo
 
