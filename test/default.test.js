@@ -13,7 +13,6 @@ describe('#default', function(){
 			assert.equal(helper.toAttr({ type: "text", value: "value"}), ' type="text" value="value"')
 		})
 		it('should use html5 data', function() {
-			assert.equal(helper.toAttr({ data: { id: 1, src: 'src'}}), ' data-id="1" data-src="src"')
 			assert.equal(helper.toAttr({ 'data-id': 1, 'data-src': 'src'}), ' data-id="1" data-src="src"')
 		})
 	})
