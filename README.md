@@ -187,6 +187,11 @@ var list = [
 
 ## Changelog
 
+### Aug 27, 2013 - version: 0.1.2
+
+* fix console.log
+* enhacement activeForm dropDownList
+
 ### Aug 22, 2013 - version: 0.1.1
 * fixed widgets test issue
 
