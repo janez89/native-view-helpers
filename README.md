@@ -247,7 +247,7 @@ helper.bl2br('New\nData');
 
 #### htmlspecialchars
 
->PHP style htmlspecialchars
+>PHP style htmlspecialchars <br>
 >htmlspecialchars(string, [options])
 
 ```javascript
@@ -257,7 +257,7 @@ helper.htmlspecialchars('<a href="link">label</a>', 'ENT_QUOTES');
 
 #### strip_tags
 
->PHP style strip_tags
+>PHP style strip_tags <br>
 >strip_tags(string, [allowable_tags])
 
 ```javascript
@@ -267,7 +267,7 @@ helper.strip_tags('<p><a href="/target">Link</a> Text</p>', '<p>');
 
 #### ucFirst
 
-> upper case the first charater
+> upper case the first charater <br>
 > ucFirst(string)
 
 ```javascript
@@ -277,7 +277,7 @@ helper.ucFirst('the string ...');
 
 #### countChars
 
-> count chars
+> count chars <br>
 > countChars(RegEx, string)
 
 ```javascript
@@ -293,7 +293,7 @@ helper.countChars(/a/g, 'amazone');
 
 #### a
 
-> Create HTML a element
+> Create HTML a element <br>
 > html.a(link_string, label_string, [options])
 
 ```javascript
@@ -306,7 +306,7 @@ helper.html.a('/target', 'Link', { title: 'Link', class: 'cls' });
 
 #### beginEl
 
-> Create only open tag with parameters
+> Create only open tag with parameters <br>
 > html.beginEl(name_of_element, options)
 
 ```javascript
@@ -316,7 +316,7 @@ helper.html.beginEl('p', { class: 'content'});
 
 #### endEl
 
-> Create element only close tag
+> Create element only close tag <br>
 > html.endEl(name_of_element)
 
 ```javascript
@@ -326,7 +326,7 @@ helper.html.endEl('p');
 
 #### el
 
-> Create element with close tag
+> Create element with close tag <br>
 > html.el(name_of_element, options)
 
 ```javascript
@@ -336,7 +336,7 @@ helper.html.el('p', { class: 'content', html: 'The text'});
 
 #### charset
 
-> Create meta element for charset
+> Create meta element for charset <br>
 > html.charset(charset_string [default: 'uft8'])
 
 ```javascript
@@ -349,7 +349,7 @@ helper.html.charset('other');
 
 #### css
 
-> Create link element for style
+> Create link element for style <br>
 > html.css(url_string, options)
 
 ```javascript
@@ -362,7 +362,7 @@ helper.html.css('style.css', { media: 'print'});
 
 #### script
 
-> Create script source element
+> Create script source element <br>
 > html.script(source_string, options)
 
 ```javascript
@@ -371,7 +371,7 @@ helper.html.script('app.js');
 ```
 #### img
 
-> Create img element
+> Create img element <br>
 > html.img(image_path, alt, options)
 
 ```javascript
@@ -387,8 +387,7 @@ helper.html.img('pic.png', 'Big moon', { width: 320 });
 
 #### imgText
 
-> Create image element with remote url text caption
-> 
+> Create image element with remote url text caption <br>
 > helper.html.imgText(message, options)
 
 ```javascript
@@ -401,8 +400,7 @@ helper.html.imgText('No Image', { w: 320, h: 240});
 
 #### refresh
 
-> Create meta element for refresh
-> 
+> Create meta element for refresh <br>
 > html.refresh(url, time_in_secounds_after_redirect, options)
 
 ```javascript
