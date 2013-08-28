@@ -13,7 +13,7 @@ A collection of helper for NodeJS templates.
 * [Helpers API](#helpers-api)
 	* [Summary](#summary)
 	* [Basic](#basic)
-		* [e](#e)
+		* [e](#e---escape)
 		* [url](#url)
 		* [numberFormat](#numberformat)
 		* [mergeObject](#mergeobject)
@@ -43,18 +43,18 @@ A collection of helper for NodeJS templates.
 		* [begin](#begin)
 		* [end](#end)
 		* [label](#label)
-		* [inputField](#inputField)
-		* [hiddenField](#hiddenField)
-		* [textField](#textField)
-		* [passwordField](#passwordField)
-		* [fileField](#fileField)
-		* [textArea](#textArea)
-		* [dropDownList](#dropDownList)
-		* [checkBox](#checkBox)
-		* [radioButton](#radioButton)
-		* [radioButtonList](#radioButtonList)
+		* [inputField](#inputfield)
+		* [hiddenField](#hiddenfield)
+		* [textField](#textfield)
+		* [passwordField](#passwordfield)
+		* [fileField](#filefield)
+		* [textArea](#textarea)
+		* [dropDownList](#dropdownlist)
+		* [checkBox](#checkbox)
+		* [radioButton](#radiobutton)
+		* [radioButtonList](#radiobuttonlist)
 		* [button](#button)
-		* [resetButton](#resetButton)
+		* [resetButton](#resetbutton)
 		* [submitButton](#submitbutton)
 	* [ActiveForm - unstable!](#activeform)
 		* [Active Form Usage](#active-form-usage)
@@ -563,9 +563,9 @@ helper.form.dropDownList('name', 2, list, { value: "id", label: "name"});
 ```
 
 > html_options <br>
-> value: select value from Object
-> label: select label from Object
-> empty: empty label
+> value: select value from Object <br>
+> label: select label from Object <br>
+> empty: empty label <br>
 
 #### checkBox
 
@@ -720,6 +720,7 @@ helper.widgets.shippingChooser('deliver', { date: new Date('2013-08-28') } );
 * added form.radioButtonList
 * fixed form.checkBox
 * added form tests
+* updated README.md API description
 
 ### Aug 27, 2013 - version: 0.1.2
 
