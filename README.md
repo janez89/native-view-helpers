@@ -272,7 +272,7 @@ helper.strip_tags('<p><a href="/target">Link</a> Text</p>', '<p>');
 
 ```javascript
 helper.ucFirst('the string ...');
-return: The string ...
+// return: The string ...
 ```
 
 #### countChars
@@ -282,7 +282,7 @@ return: The string ...
 
 ```javascript
 helper.countChars(/a/g, 'amazone');
-return: 2
+// return: 2
 ```
 
 [Go to contents](#overview)
@@ -311,7 +311,7 @@ helper.html.a('/target', 'Link', { title: 'Link', class: 'cls' });
 
 ```javascript
 helper.html.beginEl('p', { class: 'content'});
-return: <p class="content">
+// return: <p class="content">
 ```
 
 #### endEl
@@ -321,7 +321,7 @@ return: <p class="content">
 
 ```javascript
 helper.html.endEl('p');
-return: </p>
+// return: </p>
 ```
 
 #### el
@@ -331,7 +331,7 @@ return: </p>
 
 ```javascript
 helper.html.el('p', { class: 'content', html: 'The text'});
-return: <p class="content">The text</p>
+// return: <p class="content">The text</p>
 ```
 
 #### charset
@@ -367,7 +367,7 @@ helper.html.css('style.css', { media: 'print'});
 
 ```javascript
 helper.html.script('app.js');
-return: <script src="app.js" type="text/javascript"></script>
+// return: <script src="app.js" type="text/javascript"></script>
 ```
 #### img
 
@@ -376,36 +376,38 @@ return: <script src="app.js" type="text/javascript"></script>
 
 ```javascript
 helper.html.img('pic.png');
-return: <img src="pic.png" />
+// return: <img src="pic.png" />
 
 helper.html.img('pic.png', 'Big moon');
-return: <img src="pic.png" alt="big moon" />
+// return: <img src="pic.png" alt="big moon" />
 
 helper.html.img('pic.png', 'Big moon', { width: 320 });
-return: <img src="pic.png" alt="big moon" width="320" />
+// return: <img src="pic.png" alt="big moon" width="320" />
 ```
 
 #### imgText
 
 > Create image element with remote url text caption
+> 
 > helper.html.imgText(message, options)
 
 ```javascript
 helper.html.imgText('No Image');
-return: <img src="http://www.placehold.it/291x170/EFEFEF/AAAAAA&text=No Image"  />
+// return: <img src="http://www.placehold.it/291x170/EFEFEF/AAAAAA&text=No Image"  />
 
 helper.html.imgText('No Image', { w: 320, h: 240});
-return: <img src="http://www.placehold.it/320x240/EFEFEF/AAAAAA&text=No Image"  />
+// return: <img src="http://www.placehold.it/320x240/EFEFEF/AAAAAA&text=No Image"  />
 ```
 
 #### refresh
 
 > Create meta element for refresh
+> 
 > html.refresh(url, time_in_secounds_after_redirect, options)
 
 ```javascript
 helper.refresh('http://target.com');
-return: <meta http-equiv="5,http://target.com" />
+// return: <meta http-equiv="5,http://target.com" />
 ```
 
 [Go to contents](#overview)
