@@ -74,6 +74,9 @@ Node native helpers use with express
 ```javascript
 // for static helpers
 app.locals.$ = require('native-view-helpers');
+
+// or inside and in examples
+var helper = require('native-view-helpers');
 ```
 
 Use in templates
@@ -170,11 +173,17 @@ var list = [
 
 #### e - escape
 
+> escape string <br>
+> e(string)
+
 ```javascript
 helper.e('escape this content');
 ```
 
 #### url
+
+> url helper <br>
+> url(url\_string)
 
 ```javascript
 var url = helper.url('http://example.com/?show=name');
@@ -188,7 +197,9 @@ helper.url('http://ex.com/?page=5').setQs('page',10).getUrl();
 
 #### numberFormat
 
-PHP style number_format method
+> PHP number format method <br>
+> numberFormat(number, options) <br>
+> number_fromat(number, decimals, dec_point, thousands_sep) <br>
 
 ```javascript
 helper.numberFormat(10000.11111, { sep: ',', decimals: 2});
@@ -210,7 +221,9 @@ Options:
 > number_format(number, decimals, dec_point, thousands_sep)
 
 #### mergeObject
-> Merge to JSON object
+
+> Merge to JSON object <br>
+> mergeObject(toObject, fromObject) 
 
 ```javascript
 var obj1 = { name: 'Name' };
@@ -221,7 +234,8 @@ obj1 = helper.mergeObject(obj1, obj2);
 
 #### toAttr
 
-> Convert JSON object to html key value format.
+> Convert JSON object to html key value format. <br>
+> toAttr(object)
 
 ```javascript
 helper.toAttr({ name: "email", value:"mail@mailbox.com" });
@@ -230,6 +244,8 @@ helper.toAttr({ name: "email", value:"mail@mailbox.com" });
 
 #### repeat
 
+> The method repeat the string <br>
+> repeat(string, count)
 
 ```javascript
 helper.repeat('=', 10);
@@ -238,17 +254,18 @@ helper.repeat('=', 10);
 
 #### nl2br
 
-Convert \r\n, \n\r, \r, \n to &lt;br /&gt;
+> Convert \r\n, \n\r, \r, \n to &lt;br /&gt; <br>
+> nl2br(string)
 
 ```javascript
-helper.bl2br('New\nData');
+helper.nl2br('New\nData');
 // return: New\n<br />Data
 ```
 
 #### htmlspecialchars
 
->PHP style htmlspecialchars <br>
->htmlspecialchars(string, [options])
+> PHP style htmlspecialchars <br>
+> htmlspecialchars(string, [options])
 
 ```javascript
 helper.htmlspecialchars('<a href="link">label</a>', 'ENT_QUOTES');
@@ -257,8 +274,8 @@ helper.htmlspecialchars('<a href="link">label</a>', 'ENT_QUOTES');
 
 #### strip_tags
 
->PHP style strip_tags <br>
->strip_tags(string, [allowable_tags])
+> PHP style strip_tags <br>
+> strip_tags(string, [allowable_tags])
 
 ```javascript
 helper.strip_tags('<p><a href="/target">Link</a> Text</p>', '<p>');
