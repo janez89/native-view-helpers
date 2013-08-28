@@ -52,10 +52,11 @@ A collection of helper for NodeJS templates.
 		* [dropDownList](#dropDownList)
 		* [checkBox](#checkBox)
 		* [radioButton](#radioButton)
+		* [radioButtonList](#radioButtonList)
 		* [button](#button)
 		* [resetButton](#resetButton)
 		* [submitButton](#submitbutton)
-	* [ActiveForm](#activeform)
+	* [ActiveForm - unstable!](#activeform)
 		* [Active Form Usage](#active-form-usage)
 		* [data](#data)
 	* [Widgets](#widgets)
@@ -66,6 +67,7 @@ A collection of helper for NodeJS templates.
 * [Authors and contributors](#authors-and-contributors)
 * [License](#license)
 
+<a name="usage"></a>
 ## Usage
 
 Node native helpers use with express
@@ -85,7 +87,7 @@ EJS templates:
 <%- $.html.a('/url-address', 'Label') %>
 <%- $.html.charset() %>
 
-Use form
+> Use form
 
 <%- $.form.begin('/target') %>
 
@@ -99,7 +101,7 @@ Use form
 
 <%- $.form.end() %>
 
-Or active form
+> Or active form
 
 <% var form = $.activeForm('/target') %>
 <%- form.begin() %>
@@ -113,20 +115,35 @@ Or active form
 <%- form.submitButton('Login') %>
 <%- form.end() %>
 
-Use dropDownList
+> Use dropDownList
 
 <%- $.form.dropDownList('category', null, ['Category 1', 'Category 2', 'Category 3'], { empty: '-- Select --'}) %>
 <%- $.form.dropDownList('category', 'val3', { val1: 'Category 1', val2: 'Category 2', val3: 'Category 3'}) %>
 <%- $.form.dropDownList('category', 12, [{ id: 10, name: 'Category 1'}, { id: 12, name: 'Category 2'}], { value: 'id', label: 'name'}) %>
 
-Use pagination
+> Use radio button list
+
+// in javascript
+var radioButtonList = {
+	"value1": "Label 1",
+	"value2": "Label 2",
+	"value3": "Label 3" 
+};
+
+<%- $.form.radioButtonList('name', 'value1', radioButtonList) %>
+
+> radio button list with custom template
+
+<%- $.form.radioButtonList('name', 'value1', radioButtonList, { template: '{input} &lt;span&gt;{label}&lt;/span&gt;' }) %>
+
+> Use pagination
 
 <%- $.widgets.pagination({page: 1, pages: 12 }) %>
 <%- $.widgets.pagination({page: 1, count: 120, limit: 10 }) %>
 <%- $.widgets.pagination({page: 1, pages: 12, url: '/index?sort=name' }) %> out: /index?sort=name&page=[num]
 <%- $.widgets.pagination({page: 1, pages: 12, url: '/index?sort=name', query: 'p' }) %> out: /index?sort=name&p=[num]
 
-Building tree
+> Building tree
 
 var list = [
 	{ 
@@ -151,11 +168,245 @@ var list = [
 
 ### Basic
 
+#### e - escape
+
+```javascript
+helper.e('escape this content');
+```
+
+#### url
+
+```javascript
+var url = helper.url('http://example.com/?show=name');
+url.setQs('name', 'value'); // set Query string name=value
+url.getUrl(); // return http://example.com/?shown=name&name=value
+
+// alternative linked solution
+helper.url('http://ex.com/?page=5').setQs('page',10).getUrl();
+
+```
+
+#### numberFormat
+
+PHP style number_format method
+
+```javascript
+helper.numberFormat(10000.11111, { sep: ',', decimals: 2});
+// return 10,000.11
+
+// PHP style - snake case version
+helper.number_format(10000.1111, 2, '.', ',');
+// return 10,000.11
+```
+
+> numberFormat(number, options)
+
+Options:
+
+* sep: thousands separator
+* decpoint: decimal separator
+* decimals: number of decimals
+
+> number_format(number, decimals, dec_point, thousands_sep)
+
+#### mergeObject
+> Merge to JSON object
+
+```javascript
+var obj1 = { name: 'Name' };
+var obj2 = { age: 25 };
+obj1 = helper.mergeObject(obj1, obj2);
+// obj1 return: { name: 'Name', age: 25 }
+```
+
+#### toAttr
+
+> Convert JSON object to html key value format.
+
+```javascript
+helper.toAttr({ name: "email", value:"mail@mailbox.com" });
+// return string: name="email" value="mail@mailbox.com"
+```
+
+#### repeat
+
+
+```javascript
+helper.repeat('=', 10);
+// return: ==========
+```
+
+#### nl2br
+
+Convert \r\n, \n\r, \r, \n to &lt;br /&gt;
+
+```javascript
+helper.bl2br('New\nData');
+// return: New\n<br />Data
+```
+
+#### htmlspecialchars
+
+>PHP style htmlspecialchars
+>htmlspecialchars(string, [options])
+
+```javascript
+helper.htmlspecialchars('<a href="link">label</a>', 'ENT_QUOTES');
+// return: &lt;a href=&quot;link&quot;&gt;label&lt;/a&gt;
+```
+
+#### strip_tags
+
+>PHP style strip_tags
+>strip_tags(string, [allowable_tags])
+
+```javascript
+helper.strip_tags('<p><a href="/target">Link</a> Text</p>', '<p>');
+// return: <p>Link Text</p>
+```
+
+#### ucFirst
+
+> upper case the first charater
+> ucFirst(string)
+
+```javascript
+helper.ucFirst('the string ...');
+return: The string ...
+```
+
+#### countChars
+
+> count chars
+> countChars(RegEx, string)
+
+```javascript
+helper.countChars(/a/g, 'amazone');
+return: 2
+```
+
 [Go to contents](#overview)
 
 ***
 
 ### HTML
+
+#### a
+
+> Create HTML a element
+> html.a(link_string, label_string, [options])
+
+```javascript
+helper.html.a('/target', 'Link');
+// return: <a hreff="/target">Link</a>
+
+helper.html.a('/target', 'Link', { title: 'Link', class: 'cls' });
+// return: <a hreff="/target" title="Link" class="cls">Link</a>
+```
+
+#### beginEl
+
+> Create only open tag with parameters
+> html.beginEl(name_of_element, options)
+
+```javascript
+helper.html.beginEl('p', { class: 'content'});
+return: <p class="content">
+```
+
+#### endEl
+
+> Create element only close tag
+> html.endEl(name_of_element)
+
+```javascript
+helper.html.endEl('p');
+return: </p>
+```
+
+#### el
+
+> Create element with close tag
+> html.el(name_of_element, options)
+
+```javascript
+helper.html.el('p', { class: 'content', html: 'The text'});
+return: <p class="content">The text</p>
+```
+
+#### charset
+
+> Create meta element for charset
+> html.charset(charset_string [default: 'uft8'])
+
+```javascript
+helper.html.charset();
+// return: <meta charset="utf8" />
+
+helper.html.charset('other');
+// return: <meta charset="other" />
+```
+
+#### css
+
+> Create link element for style
+> html.css(url_string, options)
+
+```javascript
+helper.html.css('style.css');
+// return: <link href="style.css" rel="stylesheet" type="text/css" media="all" />
+
+helper.html.css('style.css', { media: 'print'});
+// return: <link href="style.css" rel="stylesheet" type="text/css" media="print" />
+```
+
+#### script
+
+> Create script source element
+> html.script(source_string, options)
+
+```javascript
+helper.html.script('app.js');
+return: <script src="app.js" type="text/javascript"></script>
+```
+#### img
+
+> Create img element
+> html.img(image_path, alt, options)
+
+```javascript
+helper.html.img('pic.png');
+return: <img src="pic.png" />
+
+helper.html.img('pic.png', 'Big moon');
+return: <img src="pic.png" alt="big moon" />
+
+helper.html.img('pic.png', 'Big moon', { width: 320 });
+return: <img src="pic.png" alt="big moon" width="320" />
+```
+
+#### imgText
+
+> Create image element with remote url text caption
+> helper.html.imgText(message, options)
+
+```javascript
+helper.html.imgText('No Image');
+return: <img src="http://www.placehold.it/291x170/EFEFEF/AAAAAA&text=No Image"  />
+
+helper.html.imgText('No Image', { w: 320, h: 240});
+return: <img src="http://www.placehold.it/320x240/EFEFEF/AAAAAA&text=No Image"  />
+```
+
+#### refresh
+
+> Create meta element for refresh
+> html.refresh(url, time_in_secounds_after_redirect, options)
+
+```javascript
+helper.refresh('http://target.com');
+return: <meta http-equiv="5,http://target.com" />
+```
 
 [Go to contents](#overview)
 
@@ -187,6 +438,12 @@ var list = [
 
 ## Changelog
 
+### Aug 28, 2013 - version: 0.1.3
+
+* added form.radioButtonList
+* fixed form.checkBox
+* added form tests
+
 ### Aug 27, 2013 - version: 0.1.2
 
 * fix console.log
@@ -208,7 +465,7 @@ var list = [
 ## Missing, Todo
 
 * API documentation
-* form, activeForm tests
+* activeForm tests
 * more template engine example
 * examples
 
