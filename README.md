@@ -401,7 +401,7 @@ helper.html.imgText('No Image', { w: 320, h: 240});
 #### refresh
 
 > Create meta element for refresh <br>
-> html.refresh(url, time_in_secounds_after_redirect, options)
+> html.refresh(url, time\_in\_secounds\_after\_redirect, options)
 
 ```javascript
 helper.refresh('http://target.com');
@@ -413,6 +413,46 @@ helper.refresh('http://target.com');
 ***
 
 ### Date
+
+#### time
+
+> Create unix timestamp <br>
+> date.time([new Date Or '2013-08-28 19:45 ])
+
+```javascript
+helper.date.time(); // retun timestamp in seconds
+// return 1377715631
+
+helper.date.time('2013-08-28 19:45');
+// return 1377737100
+
+helper.date.time(new Date()); 
+// return 1377715631
+```
+
+#### format
+
+> PHP style date format <br>
+> date.format(format_string, [date\_or\_timestamp])
+
+```javascript
+helper.date.format('m/d/Y H:i:s', new Date());
+// return 08/28/2013 19:45
+
+helper.date.format('m/d/Y H:i:s', 1377737100);
+// return 08/28/2013 19:45 
+
+helper.date.format('m/d/Y H:i:s');
+// return 08/28/2013 19:45
+```
+
+#### parse
+
+> PHP style date parse <br>
+> date.format(date_string) <br>
+> return object: { year, month, day, hour, minute, second, fraction, is\_localtime }
+
+[php date format options](http://php.net/manual/en/function.date.php)
 
 [Go to contents](#overview)
 
