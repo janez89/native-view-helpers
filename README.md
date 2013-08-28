@@ -460,6 +460,161 @@ helper.date.format('m/d/Y H:i:s');
 
 ### Form
 
+#### begin
+
+> Create &lt;form&gt; element <br>
+> form.begin(target\_url, options) <br>
+
+```javascript
+helper.form.begin();
+// return: <form action="" method="POST">
+
+helper.form.begin(null, { method: 'GET' })
+// return: <form action="" method="GET">
+
+helper.form.begin('/target', { upload: true, class: 'form' });
+// return: <form action="/target" class="form" method="POST" enctype="multipart/form-data">
+```
+
+> form begin options <br>
+> method: form method, default: POST <br>
+> upload: set true for file upload, default: false <br>
+> htmlElementName: use object key for other html attribute. id, class <br>
+
+#### end
+
+> Crate &lt;/form&gt; element <br>
+> form.end()
+
+#### label
+
+> Create &lt;label&gt; element <br>
+> form.label(shown\_label, html\_options) <br>
+
+```javascript
+helper.form.label('Username');
+// return <label>Username</label>
+
+helper.form.label('Username', { for: 'username' });
+// return <label for="username">Username</label>
+```
+
+#### inputField 
+
+> Create input field <br>
+> form.inputField(html\_options) <br>
+> default type text
+
+#### hiddenField
+
+> Create hidden input field <br>
+> form.hiddenField(name, value, html\_options)
+
+#### textField
+
+> Create text type input field. <br>
+> form.textField(name, value, html\_options)
+
+```javascript
+helper.form.textField('username', null, { palceholder: 'Username', class: 'input' });
+```
+
+#### passwordField
+
+> Create password type input field <br>
+> form.passwordField(name, value, html\_options)
+
+#### fileField
+
+> Create field for file upload <br>
+> form.fileField(name, html\_options)
+
+#### textArea
+
+> Create textarea <br>
+> form.textArea(name, value, html\_options)
+
+#### dropDownList
+
+> Create select element <br>
+> form.dropDownList(name, value, array\_json, html\_options)
+
+```javascript
+var list = ["Label 1", "Label 2", "Label 3"]; // index value
+helper.form.dropDownList('name', null, list);
+helper.form.dropDownList('name', 1, list); // selected 2nd
+
+// with empty chooser
+helper.form.dropDownList('name', null, list, { empty: '-- Select --'});
+
+// drop down from JSON
+var list = { "val1": "Label 1", "val2": "Label 2", "val3": "Label 3" };
+helper.form.dropDownList('name', 'val2', list);
+
+// JSON based Array
+var list = [
+	{ "id": 1, "name": "Label 1" },
+	{ "id": 2, "name": "Label 2" },
+    { "id": 3, "name": "Label 3" }
+];
+
+helper.form.dropDownList('name', 2, list, { value: "id", label: "name"});
+
+```
+
+> html_options <br>
+> value: select value from Object
+> label: select label from Object
+> empty: empty label
+
+#### checkBox
+
+> Create checkbox type input field <br>
+> form.checkBox(name, checked, html\_options)
+
+#### radioButton
+
+> Create radio button <br>
+> form.radioButton(name, value, html\_options)
+
+#### radioButtonList
+
+> Create radio button list <br>
+> form.radioButtonList(name, value, list, html\_options)
+
+```javascript
+var list = {
+	'value1': 'Label 1',
+	'value2': 'Label 2',
+	'value3': 'Label 3'
+};
+
+helper.form.radioButtonList('name', null, list );
+
+helper.form.radioButtonList('name', 'value2', list ); // selected value2
+
+// custom template
+helper.form.radioButtonList('name', 'value2', list, { template: '{input}<br>{label}' } ); // selected value2
+
+```
+
+#### button
+
+> Create button element <br>
+> form.button(label, html\_options)
+
+#### resetButton
+
+> Create reset type input <br>
+> form.resetButton(label, html\_options)
+
+#### submitButton
+
+> Create submit type input <br>
+> form.submitButton(label, html\_options)
+
+
+
 [Go to contents](#overview)
 
 ***
@@ -471,6 +626,88 @@ helper.date.format('m/d/Y H:i:s');
 ***
 
 ### Widgets
+
+#### pagination
+
+> Generate client side pagination <br>
+> widgets.pagination(options)
+
+```javascript
+helper.widgets.pagination({ page: 1, pages: 10});
+// generate: ul -> li -> a elements
+// ...
+// <li><a href="?page=[page number]">[page number]</a></li>
+// ...
+
+// options page and pages with limit
+helper.widgets.pagination({ page: 1, pages: 10, limit: 5 });
+// from count
+helper.widgets.pagination({ page: 1, count: 105, limit: 10 });
+// custom url
+helper.widgets.pagination({ page: 1, pages: 10, url: '/site'});
+// /site?page=[num]
+helper.widgets.pagination({ page: 1, pages: 10, url: '/site?name=data'});
+// /site?name=date&page=[num]
+helper.widgets.pagination({ page: 1, pages: 10, url: '/site', query: 'p'});
+// /stie?p=[num]
+
+// with custom range
+helper.widgets.pagination({ page: 1, pages: 10, range: 10 });
+```
+
+> pagination options <br>
+> page: current page, default: 1 <br>
+> pages: number of pages <br>
+> limit: number of pages per side, default: 10 <br>
+> count: number of elements <br>
+> range: number of shown links, default: 6 <br>
+> url: site url and query elements <br>
+> query: page query variable name, default: page <br>
+> active: active link class, default: active <br>
+> class: ul element class, default: empty <br>
+
+#### nestedList
+
+> Create &lt;ul&gt;,&lt;li&gt; based hierarchical list. <br>
+> widgets.nestedList(List, callback, params) <br>
+
+```javascript
+var list = [{ 
+	"id": 1, 
+	"name": "Main Category", 
+	"children": [ 
+		{ "id": 2, "name": "Sub Category 1" }, 
+		{ "id": 2, "name": "Sub Category 1"	} 
+	] 
+}];
+
+helper.widgets.nestedList(list, function (fn, el, lvl) { return el.name; })
+
+```
+
+> callback(helperFunctions, element, level) <br>
+> nestedList options <br>
+> ulClass: ul element class, recursive <br>
+> liClass: li element class, recursive <br>
+
+#### shippingChooser
+
+> Create drop down date list for deliver <br>
+> widgets.shippingChooser(name\_of\_select, options) <br>
+
+```javascript
+helper.widgets.shippingChooser('deliver');
+// generate drop down list
+
+helper.widgets.shippingChooser('deliver', { date: new Date('2013-08-28') } );
+// generate drop down list from 08/28/2013
+```
+
+> shipping chooser options <br>
+> date: instance of Date, from calulate. Default: Now <br>
+> lang: language, values: en, hu, default: en <br>
+> sunDay: shown list sun day, default: false <br>
+
 
 [Go to contents](#overview)
 
