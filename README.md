@@ -533,7 +533,7 @@ helper.form.label('Username', { for: 'username' });
 > form.textField(name, value, html\_options)
 
 ```javascript
-helper.form.textField('username', null, { palceholder: 'Username', class: 'input' });
+helper.form.textField('username', null, { placeholder: 'Username', class: 'input' });
 ```
 
 #### passwordField
